@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="theme-color" content="#0c0b09" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="description" content="Sri Vijaya Lakshmi Silver Palace & Jewellery — Premium Silver Collections in Narasaraopet. Silver Glasses, Toe Rings, Anklets, Chains and more." />
   <title>Sri Vijaya Lakshmi Silver Palace & Jewellery — Narasaraopet</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,10 +21,12 @@
       --T:0.35s cubic-bezier(0.4,0,0.2,1);
     }
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-    html{scroll-behavior:smooth;}
-    body{background:var(--ink);color:var(--cream);font-family:'Outfit',sans-serif;font-weight:300;overflow-x:hidden;}
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+    body{background:var(--ink);color:var(--cream);font-family:'Outfit',sans-serif;font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
     img{display:block;max-width:100%;}
-    a{text-decoration:none;color:inherit;}
+    a{text-decoration:none;color:inherit;-webkit-tap-highlight-color:transparent;}
+    button{-webkit-tap-highlight-color:transparent;}
+    *{-webkit-tap-highlight-color:transparent;}
     body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9998;opacity:.45;}
 
     /* NAV */
@@ -194,35 +200,131 @@
     .r.v{opacity:1;transform:translateY(0);}
     .r1{transition-delay:.1s;} .r2{transition-delay:.2s;} .r3{transition-delay:.3s;} .r4{transition-delay:.4s;}
 
-    /* RESPONSIVE */
+    /* ── TABLET ── */
     @media(max-width:900px){
       .map-inner{grid-template-columns:1fr;}
-      .map-wrap{height:280px;}
+      .map-wrap{height:300px;}
       .insta-grid{grid-template-columns:repeat(3,1fr);}
       .insta-cell.large{grid-column:span 1;grid-row:span 1;}
+      .trust-inner{gap:30px;}
     }
+
+    /* ── MOBILE ── */
     @media(max-width:768px){
+      /* Nav */
       .nav{padding:10px 16px;}
-      .nav-name{display:none;}
-      .rate-bar{padding:8px 16px;gap:16px;margin-top:64px;}
-      .hero{padding:50px 20px 60px;}
-      .banner-section{padding:30px 16px;}
-      .banner-text{padding:20px;}
-      .trust{padding:28px 16px;}
-      .trust-inner{gap:22px;}
-      .products,.rate-section,.testimonials,.insta-section,.map-section{padding:60px 16px;}
-      .cta-banner{padding:56px 16px;}
-      footer{flex-direction:column;text-align:center;padding:22px 16px;}
-      .float-wa span{display:none;}
-      .float-wa{padding:14px;border-radius:50%;}
+      .nav-name{font-size:.9rem;}
+      .nav-name span{display:none;}
+      .btn-wa,.btn-ig{padding:8px 12px;font-size:.72rem;gap:5px;}
+
+      /* Rate bar — 2 rows on mobile */
+      .rate-bar{
+        padding:10px 16px;
+        gap:8px 20px;
+        margin-top:62px;
+        justify-content:flex-start;
+      }
+      .rate-value{font-size:1.1rem;}
+      .rate-label{font-size:.58rem;}
+      .rate-unit{font-size:.58rem;}
+
+      /* Hero */
+      .hero{padding:52px 20px 56px;min-height:85vh;}
+      .hero h1{font-size:clamp(2.4rem,10vw,3.5rem);}
+      .hero-sub{font-size:.88rem;}
+      .cta-gold,.cta-outline{padding:13px 22px;font-size:.82rem;}
+      .hero-phone{font-size:.78rem;}
+      .eyebrow{font-size:.6rem;padding:5px 14px;}
+
+      /* Banner */
+      .banner-section{padding:24px 14px;}
+      .banner-frame{border-radius:14px;}
+      .banner-frame img{height:clamp(180px,50vw,320px);}
+      .banner-text{padding:18px 18px;}
+      .banner-text h2{font-size:clamp(1.3rem,5vw,2rem);}
+      .banner-text p{font-size:.72rem;}
+
+      /* Trust strip */
+      .trust{padding:24px 16px;}
+      .trust-inner{gap:18px 28px;}
+      .trust-icon{width:38px;height:38px;font-size:.9rem;}
+      .trust-lbl{font-size:.7rem;}
+      .trust-sub{font-size:.6rem;}
+
+      /* Rate section */
+      .rate-section{padding:52px 16px;}
+      .rate-cards{grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;}
+      .rate-card{padding:20px 16px;}
+      .rate-card-value{font-size:1.6rem;}
+      .rate-card-label{font-size:.58rem;}
+      .rate-card-unit{font-size:.58rem;}
+      .rate-metal-title{margin-bottom:12px!important;}
+
+      /* Products */
+      .products{padding:52px 14px;}
+      .prod-grid{grid-template-columns:1fr 1fr;gap:14px;}
+      .prod-body{padding:14px 14px 18px;}
+      .prod-name{font-size:1.2rem;}
+      .prod-tag{font-size:.55rem;}
+      .prod-cta{font-size:.65rem;}
+      .prod-num{width:28px;height:28px;font-size:.75rem;top:10px;right:10px;}
+
+      /* Testimonials */
+      .testimonials{padding:52px 16px;}
+      .testi-grid{grid-template-columns:1fr;gap:16px;}
+      .testi-card{padding:22px 20px;}
+      .testi-text{font-size:.86rem;}
+      .testi-quote{font-size:2.2rem;}
+
+      /* Instagram */
+      .insta-section{padding:52px 14px;}
       .insta-grid{grid-template-columns:repeat(3,1fr);gap:6px;}
+
+      /* Map */
+      .map-section{padding:52px 16px;}
+      .map-info h3{font-size:1.9rem;}
+      .map-wrap{height:260px;margin-top:24px;}
+      .map-detail{margin-bottom:12px;}
+      .map-txt{font-size:.82rem;}
+
+      /* CTA banner */
+      .cta-banner{padding:52px 16px;}
+      .cta-btns{flex-direction:column;align-items:stretch;}
+      .cta-btns .cta-gold,.cta-btns .btn-ig{justify-content:center;padding:15px 20px;font-size:.88rem;}
+
+      /* Section headers */
+      .sec-hdr{margin-bottom:32px;}
+      .sec-eye{font-size:.6rem;}
+
+      /* Footer */
+      footer{flex-direction:column;align-items:center;text-align:center;padding:22px 16px;gap:12px;}
+
+      /* Float WA — keep text on mobile, just smaller */
+      .float-wa{bottom:18px;right:16px;padding:11px 18px 11px 14px;font-size:.75rem;}
+      .float-wa i{font-size:1.1rem;}
     }
-    @media(max-width:480px){
-      .btn-wa,.btn-ig{padding:7px 11px;font-size:.7rem;}
-      .hero h1{font-size:2.8rem;}
-      .prod-grid{grid-template-columns:1fr 1fr;}
-      .rate-cards{grid-template-columns:1fr 1fr;}
-      .testi-grid{grid-template-columns:1fr;}
+
+    /* ── SMALL PHONES (≤400px) ── */
+    @media(max-width:400px){
+      .nav-name{display:none;}
+      .btn-wa,.btn-ig{padding:7px 10px;font-size:.68rem;}
+      .hero h1{font-size:2.2rem;}
+      .prod-grid{grid-template-columns:1fr 1fr;gap:10px;}
+      .rate-cards{grid-template-columns:1fr 1fr;gap:10px;}
+      .rate-card-value{font-size:1.35rem;}
+      .banner-frame img{height:180px;}
+      .trust-inner{gap:14px 20px;}
+      .trust-item{min-width:80px;}
+      .float-wa span{display:none;}
+      .float-wa{padding:13px;border-radius:50%;}
+    }
+
+    /* ── TOUCH DEVICE IMPROVEMENTS ── */
+    @media(hover:none){
+      .prod-card:hover,.testi-card:hover,.rate-card:hover{transform:none;}
+      .cta-gold:active{transform:scale(.97);}
+      .btn-wa:active,.btn-ig:active{transform:scale(.97);}
+      .prod-card:active{transform:translateY(-3px);}
     }
   </style>
 </head>
