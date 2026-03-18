@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sri Vijaya Lakshmi Silver Palace & Jewellery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* ── TOKENS ──────────────────────────────────────── */
+    :root {
+      --ink:      #0c0b09;
+      --ink2:     #161410;
+      --ink3:     #1e1b16;
+      --gold:     #c9a84c;
+      --gold2:    #e8cc7a;
+      --gold3:    #f5e8b8;
+      --silver:   #d0cfc8;
+      --silver2:  #a8a8a0;
+      --offwhite: #f7f3ec;
+      --muted:    #6b6659;
+      --wa:       #25D366;
+      --ig1:      #f58529;
+      --ig2:      #dd2a7b;
+      --radius:   14px;
+      --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ── RESET ───────────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--ink);
+      color: var(--offwhite);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: default;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── NOISE TEXTURE OVERLAY ───────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 40px;
+      background: rgba(12, 11, 9, 0.85);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+      transition: padding var(--transition);
+    }
+    .nav.scrolled { padding: 10px 40px; }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .nav-logo {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid var(--gold);
+      box-shadow: 0 0 18px rgba(201, 168, 76, 0.25);
+    }
+    .nav-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      color: var(--gold2);
+      line-height: 1.2;
+    }
+    .nav-name span {
+      display: block;
+      font-size: 0.68rem;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--silver2);
+      margin-top: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-wa {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--wa);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 9px 18px;
+      border-radius: 100px;
+      transition: var(--transition);
+      box-shadow: 0 4px 18px rgba(37, 211, 102, 0.3);
+    }
+    .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4); }
+
+    .btn-ig {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: linear-gradient(135deg, var(--ig1), var(--ig2));
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 9px 18px;
+      border-radius: 100px;
+      transition: var(--transition);
+      box-shadow: 0 4px 18px rgba(221, 42, 123, 0.25);
+    }
+    .btn-ig:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(221, 42, 123, 0.38); }
+
+    /* ── HERO ────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 100px 40px 60px;
+    }
+
+    /* Animated gold orbs */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(201,168,76,0.08) 0%, transparent 65%),
+                  radial-gradient(ellipse 50% 50% at 20% 70%, rgba(201,168,76,0.05) 0%, transparent 60%),
+                  var(--ink);
+    }
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      animation: drift 12s ease-in-out infinite alternate;
+    }
+    .orb1 {
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(201,168,76,0.12), transparent 70%);
+      top: -80px; right: -80px;
+      animation-duration: 14s;
+    }
+    .orb2 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(232,204,122,0.08), transparent 70%);
+      bottom: 60px; left: -60px;
+      animation-duration: 18s;
+      animation-delay: -6s;
+    }
+    @keyframes drift {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(30px, -20px) scale(1.08); }
+    }
+
+    /* Diagonal divider line */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom right, transparent 49.8%, var(--ink2) 50%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      padding: 6px 18px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      color: var(--offwhite);
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold2);
+      display: block;
+    }
+    .hero-sub {
+      margin-top: 20px;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--silver2);
+      letter-spacing: 0.04em;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+    .hero-sub strong {
+      color: var(--silver);
+      font-weight: 500;
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.45s ease both;
+    }
+    .cta-primary {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color: var(--ink);
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 14px 30px;
+      border-radius: 100px;
+      transition: var(--transition);
+      box-shadow: 0 6px 28px rgba(201, 168, 76, 0.35);
+    }
+    .cta-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(201, 168, 76, 0.5); }
+    .cta-secondary {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--silver2);
+      font-size: 0.88rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      padding: 14px 24px;
+      border: 1px solid rgba(201, 168, 76, 0.25);
+      border-radius: 100px;
+      transition: var(--transition);
+    }
+    .cta-secondary:hover { border-color: var(--gold); color: var(--gold2); transform: translateY(-3px); }
+
+    .hero-phone {
+      margin-top: 20px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      animation: fadeUp 0.8s 0.55s ease both;
+    }
+    .hero-phone a { color: var(--gold); font-weight: 500; }
+    .hero-phone a:hover { color: var(--gold2); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── BANNER IMAGE ────────────────────────────────── */
+    .banner-section {
+      background: var(--ink2);
+      padding: 60px 40px;
+    }
+    .banner-frame {
+      max-width: 1100px;
+      margin: 0 auto;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,168,76,0.15);
+    }
+    .banner-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .banner-frame:hover img { transform: scale(1.02); }
+    .banner-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(12,11,9,0.5) 0%, transparent 50%);
+    }
+
+    /* ── SECTION HEADER ──────────────────────────────── */
+    .section-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .section-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 300;
+      color: var(--offwhite);
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+    }
+    .section-title em { font-style: italic; color: var(--gold2); }
+    .section-rule {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 18px auto 0;
+    }
+
+    /* ── PRODUCTS ────────────────────────────────────── */
+    .products-section {
+      background: var(--ink2);
+      padding: 90px 40px;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      position: relative;
+      background: var(--ink3);
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(201, 168, 76, 0.1);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .product-card:hover {
+      border-color: rgba(201, 168, 76, 0.35);
+      transform: translateY(-8px);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.2);
+    }
+    .product-img-wrap {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: var(--ink3);
+    }
+    .product-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .product-card:hover .product-img-wrap img { transform: scale(1.07); }
+
+    .product-info {
+      padding: 22px 24px 26px;
+      border-top: 1px solid rgba(201, 168, 76, 0.1);
+    }
+    .product-tag {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .product-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem;
+      font-weight: 400;
+      color: var(--offwhite);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .product-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      transition: var(--transition);
+    }
+    .product-cta i { font-size: 0.65rem; transition: transform 0.3s ease; }
+    .product-card:hover .product-cta { color: var(--gold2); }
+    .product-card:hover .product-cta i { transform: translateX(4px); }
+
+    /* Gold number badge */
+    .product-num {
+      position: absolute;
+      top: 16px; right: 16px;
+      width: 34px; height: 34px;
+      background: rgba(12, 11, 9, 0.7);
+      border: 1px solid rgba(201,168,76,0.35);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      color: var(--gold);
+      backdrop-filter: blur(6px);
+    }
+
+    /* ── TRUST STRIP ─────────────────────────────────── */
+    .trust-strip {
+      background: linear-gradient(135deg, var(--ink3), var(--ink2));
+      border-top: 1px solid rgba(201,168,76,0.1);
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+      padding: 40px 40px;
+    }
+    .trust-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .trust-icon {
+      width: 44px; height: 44px;
+      background: rgba(201, 168, 76, 0.1);
+      border: 1px solid rgba(201, 168, 76, 0.2);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      color: var(--gold);
+    }
+    .trust-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--silver);
+      letter-spacing: 0.05em;
+    }
+    .trust-sub {
+      font-size: 0.68rem;
+      color: var(--muted);
+    }
+
+    /* ── MAP SECTION ─────────────────────────────────── */
+    .map-section {
+      background: var(--ink);
+      padding: 90px 40px;
+    }
+    .map-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .map-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 300;
+      color: var(--offwhite);
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+    .map-info h3 em { font-style: italic; color: var(--gold2); }
+    .map-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .map-detail-icon {
+      width: 36px; height: 36px;
+      min-width: 36px;
+      background: rgba(201, 168, 76, 0.08);
+      border: 1px solid rgba(201, 168, 76, 0.2);
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem;
+      color: var(--gold);
+      margin-top: 2px;
+    }
+    .map-detail-text {
+      font-size: 0.88rem;
+      color: var(--silver2);
+      line-height: 1.5;
+    }
+    .map-detail-text strong { color: var(--silver); display: block; font-weight: 500; }
+    .map-detail-text a { color: var(--gold); }
+    .map-detail-text a:hover { color: var(--gold2); }
+
+    .map-frame-wrap {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(201,168,76,0.15);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+      height: 380px;
+    }
+    .map-frame-wrap iframe {
+      width: 100%; height: 100%;
+      border: 0;
+      filter: grayscale(30%) brightness(0.85) saturate(0.9);
+    }
+
+    /* ── CONTACT BANNER ──────────────────────────────── */
+    .contact-banner {
+      background: linear-gradient(135deg, var(--ink3) 0%, rgba(201,168,76,0.06) 100%);
+      padding: 80px 40px;
+      text-align: center;
+      border-top: 1px solid rgba(201,168,76,0.12);
+    }
+    .contact-banner h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 300;
+      color: var(--offwhite);
+      margin-bottom: 10px;
+    }
+    .contact-banner h2 em { font-style: italic; color: var(--gold2); }
+    .contact-banner p {
+      color: var(--silver2);
+      font-size: 0.95rem;
+      margin-bottom: 32px;
+      max-width: 460px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .contact-btns {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .contact-btns .cta-primary { font-size: 1rem; padding: 16px 36px; }
+    .contact-btns .btn-ig-lg {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--ig1), var(--ig2));
+      color: #fff;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 16px 30px;
+      border-radius: 100px;
+      transition: var(--transition);
+      box-shadow: 0 6px 28px rgba(221, 42, 123, 0.3);
+    }
+    .contact-btns .btn-ig-lg:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(221, 42, 123, 0.45); }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(201,168,76,0.1);
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--gold2);
+      font-weight: 400;
+    }
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+    .footer-social {
+      display: flex;
+      gap: 12px;
+    }
+    .footer-social a {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.88rem;
+      color: var(--muted);
+      transition: var(--transition);
+    }
+    .footer-social a:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    /* ── FLOAT WHATSAPP ──────────────────────────────── */
+    .float-wa {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--wa);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 13px 20px 13px 16px;
+      border-radius: 100px;
+      box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+      transition: var(--transition);
+      letter-spacing: 0.04em;
+    }
+    .float-wa i { font-size: 1.2rem; }
+    .float-wa:hover { transform: translateY(-4px) scale(1.04); box-shadow: 0 14px 40px rgba(37, 211, 102, 0.55); }
+    .float-wa-text { white-space: nowrap; }
+
+    /* ── SCROLL REVEAL ───────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav { padding: 12px 20px; }
+      .nav-name { display: none; }
+      .hero { padding: 90px 24px 60px; }
+      .banner-section { padding: 40px 20px; }
+      .products-section { padding: 60px 20px; }
+      .trust-inner { gap: 30px; }
+      .map-section { padding: 60px 20px; }
+      .map-inner { grid-template-columns: 1fr; }
+      .map-frame-wrap { height: 280px; }
+      .contact-banner { padding: 60px 20px; }
+      footer { flex-direction: column; text-align: center; padding: 24px 20px; }
+      .float-wa-text { display: none; }
+      .float-wa { padding: 16px; border-radius: 50%; }
+      .float-wa i { font-size: 1.4rem; }
+    }
+    @media (max-width: 480px) {
+      .nav-links { gap: 8px; }
+      .btn-wa, .btn-ig { padding: 8px 12px; font-size: 0.72rem; }
+      .hero-ctas { gap: 10px; }
+      .cta-primary, .cta-secondary { padding: 12px 20px; font-size: 0.82rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ───────────────────────────────────────────── -->
+  <nav class="nav" id="nav">
+    <div class="nav-brand">
+      <img src="images/logo.jpg" alt="Logo" class="nav-logo" onerror="this.style.display='none'" />
+      <div class="nav-name">
+        Sri Vijaya Lakshmi
+        <span>Silver Palace & Jewellery</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="https://instagram.com/sri_vijayalakshmi_silver_/" class="btn-ig" target="_blank" rel="noopener">
+        <i class="fab fa-instagram"></i> Instagram
+      </a>
+      <a href="https://wa.me/916302488411" class="btn-wa" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ──────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">✦ Narasaraopet's Trusted Jewellers ✦</div>
+      <h1 class="hero-title">
+        Premium Silver
+        <em>Collections</em>
+      </h1>
+      <p class="hero-sub">
+        Handcrafted with care · <strong>Sri Vijaya Lakshmi Silver Palace</strong> · Est. in Narasaraopet
+      </p>
+      <div class="hero-ctas">
+        <a href="https://wa.me/916302488411" class="cta-primary" target="_blank" rel="noopener">
+          <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+        </a>
+        <a href="#collections" class="cta-secondary">
+          <i class="fas fa-gem"></i> View Collections
+        </a>
+      </div>
+      <p class="hero-phone">📞 Call us: <a href="tel:9949274667">9949274667</a></p>
+    </div>
+  </section>
+
+  <!-- ── BRAND BANNER ───────────────────────────────────── -->
+  <section class="banner-section">
+    <div class="banner-frame reveal">
+      <img src="images/banner.jpg" alt="Sri Vijaya Lakshmi Silver Palace & Jewellery" onerror="this.parentElement.style.display='none'" />
+      <div class="banner-overlay"></div>
+    </div>
+  </section>
+
+  <!-- ── TRUST STRIP ────────────────────────────────────── -->
+  <div class="trust-strip">
+    <div class="trust-inner">
+      <div class="trust-item reveal">
+        <div class="trust-icon"><i class="fas fa-certificate"></i></div>
+        <div class="trust-label">100% Pure Silver</div>
+        <div class="trust-sub">Certified Quality</div>
+      </div>
+      <div class="trust-item reveal reveal-delay-1">
+        <div class="trust-icon"><i class="fas fa-store"></i></div>
+        <div class="trust-label">Walk-in Store</div>
+        <div class="trust-sub">Narasaraopet</div>
+      </div>
+      <div class="trust-item reveal reveal-delay-2">
+        <div class="trust-icon"><i class="fas fa-hand-sparkles"></i></div>
+        <div class="trust-label">Handcrafted</div>
+        <div class="trust-sub">Artisan Made</div>
+      </div>
+      <div class="trust-item reveal reveal-delay-3">
+        <div class="trust-icon"><i class="fas fa-comments"></i></div>
+        <div class="trust-label">Easy Ordering</div>
+        <div class="trust-sub">WhatsApp &amp; Call</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── COLLECTIONS ───────────────────────────────────── -->
+  <section class="products-section" id="collections">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">✦ Our Collections ✦</div>
+      <h2 class="section-title">Crafted in <em>Silver</em></h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="products-grid">
+
+      <div class="product-card reveal">
+        <div class="product-num">01</div>
+        <div class="product-img-wrap">
+          <img src="images/item1.jpg" alt="Silver Glasses" onerror="this.parentElement.style.background='#1e1b16'" />
+        </div>
+        <div class="product-info">
+          <div class="product-tag">Silverware</div>
+          <div class="product-name">Silver Glasses</div>
+          <a href="https://wa.me/916302488411?text=Hi%2C%20I'm%20interested%20in%20Silver%20Glasses" class="product-cta" target="_blank" rel="noopener">
+            Enquire Now <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card reveal reveal-delay-1">
+        <div class="product-num">02</div>
+        <div class="product-img-wrap">
+          <img src="images/item2.jpg" alt="Toe Rings" onerror="this.parentElement.style.background='#1e1b16'" />
+        </div>
+        <div class="product-info">
+          <div class="product-tag">Jewellery</div>
+          <div class="product-name">Toe Rings</div>
+          <a href="https://wa.me/916302488411?text=Hi%2C%20I'm%20interested%20in%20Toe%20Rings" class="product-cta" target="_blank" rel="noopener">
+            Enquire Now <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card reveal reveal-delay-2">
+        <div class="product-num">03</div>
+        <div class="product-img-wrap">
+          <img src="images/item3.jpg" alt="Silver Jewellery" onerror="this.parentElement.style.background='#1e1b16'" />
+        </div>
+        <div class="product-info">
+          <div class="product-tag">Jewellery</div>
+          <div class="product-name">Silver Jewellery</div>
+          <a href="https://wa.me/916302488411?text=Hi%2C%20I'm%20interested%20in%20Silver%20Jewellery" class="product-cta" target="_blank" rel="noopener">
+            Enquire Now <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── MAP ───────────────────────────────────────────── -->
+  <section class="map-section">
+    <div class="map-inner">
+      <div class="map-info reveal">
+        <div class="section-eyebrow" style="text-align:left; margin-bottom:14px;">✦ Find Us ✦</div>
+        <h3>Visit Our <em>Store</em></h3>
+        <br/>
+        <div class="map-detail">
+          <div class="map-detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="map-detail-text">
+            <strong>Location</strong>
+            Narasaraopet, Andhra Pradesh
+          </div>
+        </div>
+        <div class="map-detail">
+          <div class="map-detail-icon"><i class="fas fa-phone"></i></div>
+          <div class="map-detail-text">
+            <strong>Phone</strong>
+            <a href="tel:9949274667">9949274667</a>
+          </div>
+        </div>
+        <div class="map-detail">
+          <div class="map-detail-icon"><i class="fab fa-whatsapp"></i></div>
+          <div class="map-detail-text">
+            <strong>WhatsApp</strong>
+            <a href="https://wa.me/916302488411" target="_blank">+91 63024 88411</a>
+          </div>
+        </div>
+        <div class="map-detail">
+          <div class="map-detail-icon"><i class="fab fa-instagram"></i></div>
+          <div class="map-detail-text">
+            <strong>Instagram</strong>
+            <a href="https://instagram.com/sri_vijayalakshmi_silver_/" target="_blank">@sri_vijayalakshmi_silver_</a>
+          </div>
+        </div>
+      </div>
+      <div class="map-frame-wrap reveal reveal-delay-1">
+        <iframe
+          src="https://maps.google.com/maps?q=Sri%20Vijaya%20Lakshmi%20Silver%20Palace%20and%20Jewellery%20Narasaraopet&t=&z=17&ie=UTF8&iwloc=&output=embed"
+          title="Store Location"
+          loading="lazy"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT BANNER ────────────────────────────────── -->
+  <section class="contact-banner">
+    <h2 class="reveal">Let's <em>Connect</em></h2>
+    <p class="reveal reveal-delay-1">Order on WhatsApp, follow us on Instagram, or visit our store in Narasaraopet.</p>
+    <div class="contact-btns reveal reveal-delay-2">
+      <a href="https://wa.me/916302488411" class="cta-primary" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+      </a>
+      <a href="https://instagram.com/sri_vijayalakshmi_silver_/" class="btn-ig-lg" target="_blank" rel="noopener">
+        <i class="fab fa-instagram"></i> Follow on Instagram
+      </a>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-brand">Sri Vijaya Lakshmi Silver Palace & Jewellery</div>
+    <div class="footer-copy">© 2026 · All rights reserved · Narasaraopet</div>
+    <div class="footer-social">
+      <a href="https://wa.me/916302488411" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+      <a href="https://instagram.com/sri_vijayalakshmi_silver_/" target="_blank" rel="noopener" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="tel:9949274667" aria-label="Call us">
+        <i class="fas fa-phone"></i>
+      </a>
+    </div>
+  </footer>
+
+  <!-- ── FLOATING WHATSAPP ──────────────────────────────── -->
+  <a href="https://wa.me/916302488411" class="float-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+    <span class="float-wa-text">Chat Now</span>
+  </a>
+
+  <script>
+    // Sticky nav shrink
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
